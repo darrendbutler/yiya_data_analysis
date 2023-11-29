@@ -1,0 +1,48 @@
+---
+title: "Yiya Course 3 Learner Outcome Regressions"
+author: "Ren Butler"
+date: "2023-11-03"
+output: powerpoint_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## R Markdown
+
+This is an R Markdown presentation. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.
+
+## Slide with Bullets
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+## Slide with R Output
+
+```{r cars, echo = TRUE}
+summary(cars)
+```
+
+## Slide with Plot
+
+```{r pressure}
+plot(pressure)
+```
+## Regression of Outcomes
+
+```{r}
+learner_outcomes = read.csv("/Users/ddbutler/repos_new/yiya_data_analysis/data/processed/course_3_outcomes_paid_users.csv")
+
+#ensure course_id is treated as a factor
+learner_outcomes$course_id = factor(learner_outcomes$course_id)
+```
+
+
+```{r}
+#predicting exam performance, with # of questions during the broadcast and the registration cluster, with interaction
+summary(lm(eqc_fa_sr ~ pqfa_db * course_id, data = learner_outcomes))
+```

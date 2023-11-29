@@ -1,0 +1,87 @@
+---
+title: "lira_learner_outcomes_analysis"
+author: "Ren Butler"
+date: "2023-10-04"
+output: powerpoint_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r}
+#install.packages("ggplot2")
+#install.packages("dplyr")
+#install.packages("broom")
+#install.packages("ggpubr")
+```
+```{r}
+library(ggplot2)
+library(dplyr)
+library(broom)
+library(ggpubr)
+```
+```{r}
+# read data
+lira_learner_outcomes = read.csv("/Users/ddbutler/repos_new/yiya_data_analysis/data/processed/lira_learner_outcomes.csv")
+```
+
+## Exploratory Data Analysis
+```{r}
+summary(lira_learner_outcomes)
+```
+# Assumption Checking
+
+## Independence of Observations
+
+We assume the explanatory variables are independent (not highly correlated). The correlation is 0.29 on the (-1 to 1) scale so I accept this assumption of independence.
+```{r}
+cor(lira_learner_outcomes$total_practice_questions_during_broadcasts, lira_learner_outcomes$total_practice_questions_before_after_broadcasts)
+```
+
+## Normality
+
+Normality does not hold true for either variables. (No bell shape)
+
+```{r}
+hist(lira_learner_outcomes$total_practice_questions_during_broadcasts, main="Distribution of Practice Questions During Broadcast", xlab = "Total First Time Responses to Lesson Questions During Broadcasts")
+```
+
+```{r}
+hist(lira_learner_outcomes$total_practice_questions_before_after_broadcasts, main="Distribution of Practice Questions During Broadcast", xlab = "Total First Time Responses to Lesson Questions Outside Broadcasts")
+```
+
+## Linearity
+```{r}
+plot(total ~ total_practice_questions_during_broadcasts, data=heart.data)
+```
+
+
+## Linear Regression
+
+Linear regression is a regression model that uses a straight line to describe the **relationship between variables**. It finds the line of best fit through your data by searching for the value of the regression coefficient(s) that minimizes the total error of the model.
+
+## R Markdown
+
+This is an R Markdown presentation. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.
+
+## Slide with Bullets
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+## Slide with R Output
+
+```{r cars, echo = TRUE}
+summary(cars)
+```
+
+## Slide with Plot
+
+```{r pressure}
+plot(pressure)
+```
+
